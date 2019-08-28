@@ -1,0 +1,22 @@
+body {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+
+  font-family: 'Open Sans', sans-serif;
+}
+
+p, #title {
+  width: 100%;
+  text-align: center;
+}
+
+#status {
+  font-size: 1.3em;
+}
+
+#about {
+  margin-top: 5em;
+}
