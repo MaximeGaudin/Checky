@@ -4,6 +4,7 @@ package com.mgaudin.sandbox.checky
 
 import com.mgaudin.sandbox.checky.base.interpreters.LongAlgebraicNotationInterpreter
 import org.w3c.dom.HTMLParagraphElement
+import org.w3c.dom.HTMLSpanElement
 import kotlin.browser.document
 import kotlin.browser.window
 
@@ -33,6 +34,9 @@ var board: Chessboard? = null
 val engine = CheckyEngine()
 val lanInterpreter = LongAlgebraicNotationInterpreter()
 
+val loader = document.getElementById("loader") as HTMLSpanElement
+val status = document.getElementById("status") as HTMLParagraphElement
+
 fun onDragStart(
   source: String,
   piece: String,
@@ -56,7 +60,7 @@ fun onDrop(
   }
   engine.applyMove(move.from, move.to)
 
-  val status = document.getElementById("status") as HTMLParagraphElement
+  loader.style.visibility = "visible"
   status.textContent = "Checky is thinking (~5-10s)..."
 
   window.setTimeout({
@@ -67,6 +71,7 @@ fun onDrop(
       board?.position(engine.toFen())
     }
 
+    loader.style.visibility = "hidden"
     status.textContent = "White to play : Your turn"
   }, 250
   )
